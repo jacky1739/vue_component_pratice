@@ -1,3 +1,5 @@
+import pagination from './pagination.js';
+
 let productModal = null;
 let delProductModal = null;
 
@@ -13,6 +15,9 @@ const app = Vue.createApp({
             },
             pagination: {}
         }
+    },
+    components: {
+        pagination
     },
     methods: {
         getData(page){
@@ -104,31 +109,31 @@ const app = Vue.createApp({
     }
 })
 
-app.component('pagination', {
-    props: ['page'],
-    template: `
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous" @click="$emit('get-product', page.current_page - 1)">
-                <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item" :class="{ 'active' : item === page.current_page}" v-for="item in page.total_pages" :key="item">
-                <a class="page-link" href="#" @click="$emit('get-product', item)">{{ item }}</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next" @click="$emit('get-product', page.current_page + 1)">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    `,
-    created() {
-        // console.log(this.page.total_page)
-    }
-})
+// app.component('pagination', {
+//     props: ['page'],
+//     template: `
+//     <nav aria-label="Page navigation example">
+//         <ul class="pagination">
+//             <li class="page-item">
+//                 <a class="page-link" href="#" aria-label="Previous" @click="$emit('get-product', page.current_page - 1)">
+//                 <span aria-hidden="true">&laquo;</span>
+//                 </a>
+//             </li>
+//             <li class="page-item" :class="{ 'active' : item === page.current_page}" v-for="item in page.total_pages" :key="item">
+//                 <a class="page-link" href="#" @click="$emit('get-product', item)">{{ item }}</a>
+//             </li>
+//             <li class="page-item">
+//                 <a class="page-link" href="#" aria-label="Next" @click="$emit('get-product', page.current_page + 1)">
+//                 <span aria-hidden="true">&raquo;</span>
+//                 </a>
+//             </li>
+//         </ul>
+//     </nav>
+//     `,
+//     created() {
+//         // console.log(this.page.total_page)
+//     }
+// })
 
 
 
