@@ -64,6 +64,10 @@
       </div>
 
 
+      <div class="d-flex justify-content-center mt-5">
+      <pagination :page="pagination" @get-product="getData"></pagination>
+
+      </div>
       <!-- Modal -->
       <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
           aria-hidden="true">

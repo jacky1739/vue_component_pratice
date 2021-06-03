@@ -1,7 +1,7 @@
 let productModal = null;
 let delProductModal = null;
 
-Vue.createApp({
+const app = Vue.createApp({
     data(){
         return {
             api_path: 'jacky',
@@ -10,16 +10,18 @@ Vue.createApp({
             isNew: false,  //是否是新的 
             tempProduct: {
                 imagesUrl: [],
-            }
+            },
+            pagination: {}
         }
     },
     methods: {
-        getData(){
-            axios.get(`${this.base_url}api/${this.api_path}/admin/products`).then((res) => {
+        getData(page){
+            axios.get(`${this.base_url}api/${this.api_path}/admin/products?page=${page}`).then((res) => {
                 if(res.data.success){
-                    console.log(res);
+                    // console.log(res);
                     this.products = res.data.products;
-                    console.log(this.products);
+                    this.pagination = res.data.pagination;
+                    // console.log(this.pagination);
                 }
             }).catch((err) => {
                 alert(err.data.message);
@@ -100,4 +102,34 @@ Vue.createApp({
         console.log(token);
         this.getData();
     }
-}).mount("#app")
+})
+
+app.component('pagination', {
+    props: ['page'],
+    template: `
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous" @click="$emit('get-product', page.current_page - 1)">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" :class="{ 'active' : item === page.current_page}" v-for="item in page.total_pages" :key="item">
+                <a class="page-link" href="#" @click="$emit('get-product', item)">{{ item }}</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next" @click="$emit('get-product', page.current_page + 1)">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    `,
+    created() {
+        // console.log(this.page.total_page)
+    }
+})
+
+
+
+app.mount("#app")
