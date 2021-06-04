@@ -69,7 +69,7 @@
 
       </div>
       <!-- Modal -->
-      <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
+      <!-- <div id="productModal" ref="productModal" class="modal fade" tabindex="-1" aria-labelledby="productModalLabel"
           aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content border-0">
@@ -91,17 +91,6 @@
                     </div>
                     <img class="img-fluid" :src="tempProduct.imagesUrl" alt="">
                   </div>
-
-                  <!-- <div class="mb-1">多圖新增</div>
-                  <div v-if="Array.isArray(tempProduct.imagesUrl)">
-                    <div class="mb-1" v-for="(image, key) in tempProduct.imagesUrl" :key="key">
-                      <div class="form-group">
-                        <label for="imageUrl">圖片網址</label>
-                        <input v-model="tempProduct.imagesUrl[key]" type="text" class="form-control"
-                          placeholder="請輸入圖片連結">
-                      </div>
-                      <img class="img-fluid" :src="image">
-                    </div> -->
 
                   <div>
                     <button class="btn btn-outline-primary btn-sm d-block w-100" @click="openModal('edit')">
@@ -177,8 +166,8 @@
             </div>
           </div>
         </div>
-      </div>
-
+      </div> -->
+      <product-modal :temp-product="tempProduct" @update-product="updateProduct"></product-modal>
 
       <div id="delProductModal" ref="delProductModal" class="modal fade" tabindex="-1"
           aria-labelledby="delProductModalLabel" aria-hidden="true">
